@@ -78,11 +78,14 @@ fn main() {
     school.add(7, "Alice");
     school.add(2, "Ann");
     school.add(2, "Bob");
-    let vecGrages = school.grades();
-    println!("Vec of grades:{:?}", vecGrages);
+    let vecGrades = school.grades();
+    println!("Vec of grades:{:?}", vecGrades);
+    let vecNames = school.grade(2);
+    println!("Vec of names: {:?}", vecNames);
 }
 
 
+#[derive(PartialEq)]
 pub struct School {
     // !TODO
     students: HashMap<String, u32>
@@ -108,9 +111,13 @@ impl School {
     }
 
 
-    pub fn grade(&self, grade: u32) -> Vec<String> {
-        unimplemented!()
-
-        
+    pub fn grade(&self, _grade: u32) -> Vec<String> {
+        let mut vec: Vec<String> = Vec::new();
+        for (key, val) in self.students.iter() {
+            if *val == _grade {
+                vec.push(key.to_string())
+            }
+        }
+        vec
     }
 }
